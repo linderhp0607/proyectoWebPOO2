@@ -30,10 +30,12 @@
 	
 	<div class="container text-center">
 		<div>
-			<h3>Registro de Alumno</h3>
+			<h3 th:if="${alumno.id== null}">Registro de Alumno</h3>
+			<h3 th:unless="${alumno.id== null}">Editar Alumno</h3>
 		</div>
 		<form th:action="@{/alumnos/guardar}" th:object="${alumno}" method="post"
 			style="max-width: 600px; margin: 0 auto;">
+			<input type="hidden" th:field="*{id}">
 			<div class="mb-3">
 				<label class="form-label">nombres:</label> 
 				<input type="text" class="form-control" th:field="*{nombres}" required="required">

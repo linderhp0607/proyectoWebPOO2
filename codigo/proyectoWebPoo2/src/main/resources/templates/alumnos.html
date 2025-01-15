@@ -65,6 +65,10 @@
 					<td th:text="${alumno.correo}"></td>
 					<td th:text="${alumno.aula.nombre}"></td>
 					<td th:text="${alumno.aula.turno}"></td>
+					<td><a th:href="@{'/alumnos/editar'+'/'+${alumno.id}}" class="btn btn-warning">editar</a>
+						<a th:href="@{'/alumnos/eliminar'+'/'+${alumno.id}}" class="btn btn-danger"
+                   onclick="return confirm('¿Estás seguro de eliminar esta alumno');">eliminar</a>
+                   </td>
 				</tr>
 			</tbody>
 		</table>
