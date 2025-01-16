@@ -3,6 +3,7 @@ package com.app.proyecto.alumno;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,17 @@ public class alumnoControlador {
 	private alumnoRepositorio repositorio;
 	
 	@Autowired
+	private alumnoServicio serviceRepositorio;
+	
+	@Autowired
 	private aulaRepositorio aulaRepository;
 	
 	@GetMapping("/alumnos")
-	public String listarAlumnos(Model modelo) {
-		List<Alumno> listaAlumnos= repositorio.findAll();
+	public String listarAlumnos(Model modelo, @Param("palabraClave") String palabraClave) {
+		List<Alumno> listaAlumnos= serviceRepositorio.listAll(palabraClave);
+
 		modelo.addAttribute("listaAlumnos", listaAlumnos);
+		modelo.addAttribute("palabraClave", palabraClave);
 		return "alumnos";
 	}
 	
@@ -60,4 +66,5 @@ public class alumnoControlador {
 	    }
 	    return "redirect:/alumnos";
 	}
+	
 }

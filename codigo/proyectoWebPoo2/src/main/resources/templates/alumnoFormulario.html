@@ -65,13 +65,57 @@
 				<input type="text" class="form-control" th:field="*{correo}" required="required">
 			</div>
 			<div class="mb-3">
-				<label class="form-label">aula:</label> 
-				<select th:field="*{aula}" class="form-control" required="required">
-				<th:block th:each="aula: ${listaAulas}">
-					<option th:text="${aula.nombre}" th:value="${aula.id}"></option>
-				</th:block>
+				<label class="form-label">Carrera:</label> <select
+					class="form-control" th:field="*{carrera}" required>
+					<option value="" disabled selected>Seleccione una carrera</option>
+					<option value="ingenieria_sistemas">Ingeniería de Sistemas</option>
+					<option value="ingenieria_civil">Ingeniería Civil</option>
+					<option value="medicina">Medicina</option>
+					<option value="derecho">Derecho</option>
+					<option value="administracion">Administración</option>
+					<option value="psicologia">Psicologia</option>
+					<option value="enfermeria">Enfermeria</option>
 				</select>
 			</div>
+			<div class="mb-3">
+				<label for="turno">Turno:</label> <select id="turno" name="turno"
+					onchange="filtrarAulas()" class="form-control">
+					<option value="" selected disabled>Seleccione un turno</option>
+					<option value="mañana">Mañana</option>
+					<option value="tarde">Tarde</option>
+				</select>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label">Aula:</label> <select id="aula"
+					th:field="*{aula}" class="form-control" required="required">
+					<option value="" selected disabled>Seleccione un aula</option>
+					<th:block th:each="aula : ${listaAulas}">
+						<option th:text="${aula.nombre}" th:value="${aula.id}"
+							th:attr="data-turno=${aula.turno}"></option>
+					</th:block>
+				</select>
+			</div>
+
+			<script>
+    function filtrarAulas() {
+        const turnoSeleccionado = document.getElementById('turno').value;
+        const aulas = document.querySelectorAll('#aula option');
+
+        aulas.forEach(aula => {
+            const turnoAula = aula.getAttribute('data-turno');
+            if (turnoAula === turnoSeleccionado || aula.value === "") {
+                aula.style.display = 'block'; // Mostrar la opción
+            } else {
+                aula.style.display = 'none'; // Ocultar la opción
+            }
+        });
+
+        // Restablecer el valor del select de aulas
+        document.getElementById('aula').value = "";
+    }
+</script>
+
 			<button type="submit" class="btn btn-primary">Guardar</button>
 			<button type="reset" class="btn btn-danger">Cancelar</button>
 		</form>

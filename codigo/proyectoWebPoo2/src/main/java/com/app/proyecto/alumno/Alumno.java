@@ -33,10 +33,12 @@ public class Alumno {
 	private String direccion;
 	@Column(name = "Correo",nullable = false, unique = true)
 	private String correo;
+	@Column(name = "Carrera",nullable = false)
+	private String carrera;
 	@Column(name = "Dni",nullable = false, unique = true)
-	private int dni;
+	private String dni;
 	@Column(name = "Telefono",length = 60, nullable = false)
-	private int telefono;
+	private String telefono;
 	
 	@ManyToOne
 	@JoinColumn(name = "aula_id")
@@ -47,7 +49,7 @@ public class Alumno {
 	}
 
 	public Alumno(int id, String nombres, String apellidos, LocalDate fechaNacimiento, String direccion, String correo,
-			int dni, int telefono, com.app.proyecto.aula.aula aula) {
+			String carrera, String dni, String telefono, com.app.proyecto.aula.aula aula) {
 		super();
 		this.id = id;
 		this.nombres = nombres;
@@ -55,19 +57,21 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 		this.direccion = direccion;
 		this.correo = correo;
+		this.carrera = carrera;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.aula = aula;
 	}
 
-	public Alumno(String nombres, String apellidos, LocalDate fechaNacimiento, String direccion, String correo, int dni,
-			int telefono, com.app.proyecto.aula.aula aula) {
+	public Alumno(String nombres, String apellidos, LocalDate fechaNacimiento, String direccion, String correo,
+			String carrera, String dni, String telefono, com.app.proyecto.aula.aula aula) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.fechaNacimiento = fechaNacimiento;
 		this.direccion = direccion;
 		this.correo = correo;
+		this.carrera = carrera;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.aula = aula;
@@ -121,19 +125,27 @@ public class Alumno {
 		this.correo = correo;
 	}
 
-	public int getDni() {
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
+
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
@@ -144,8 +156,7 @@ public class Alumno {
 	public void setAula(aula aula) {
 		this.aula = aula;
 	}
-	
-	
+
 	
 	
 }
