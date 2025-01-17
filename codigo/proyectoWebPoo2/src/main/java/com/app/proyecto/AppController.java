@@ -8,7 +8,11 @@ public class AppController {
 
 	@GetMapping("")
 	public String Inicio() {
-		return "index";
+		return "login";
 	}
-
+	
+	@GetMapping("/index")
+    public String mostrarIndex() {
+        return "index";
+    }
 }

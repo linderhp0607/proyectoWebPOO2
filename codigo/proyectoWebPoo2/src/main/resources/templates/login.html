@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4" style="width: 25rem;">
+        <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+        <form id="loginForm" onsubmit="return validarCredenciales()">
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+        </form>
+        <div id="error-message" class="text-danger mt-3 text-center" style="display: none;">Usuario o contraseña incorrectos</div>
+    </div>
+</div>
+
+<script>
+    function validarCredenciales() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
+
+        // Validar credenciales
+        if (username === "admin" && password === "123456") {
+            window.location.href = "/index"; // Redirigir si las credenciales son correctas
+            return false; // Evitar que el formulario realice un envío real
+        } else {
+            errorMessage.style.display = "block"; // Mostrar mensaje de error
+            return false; // Evitar redirección si las credenciales son incorrectas
+        }
+    }
+</script>
+
+</body>
+</html>
