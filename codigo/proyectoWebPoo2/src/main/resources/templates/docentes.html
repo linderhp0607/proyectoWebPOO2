@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>lista de alumnos</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="">Gestion Academica</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/">INICIO</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container text-center">
+	<div>
+			<h1>lista de docentes</h1>
+		</div>
+		<br>
+	<a class="btn btn-primary float-start h5" th:href="@{/docentes/nuevo}">Agregar Docente</a>
+	<br>
+	<div class="input-group mt-3" style="max-width: 400px; margin: auto;">
+		</div>
+	<br>
+	<div>
+	<form class="form-line" th:action="@{/docentes}">
+		<div class="form-group mb-2">
+			<label>buscar:</label>
+		</div>
+			<div class="form-group mx-sm-3 mb-2">
+				<input type="text" name="palabraClave" class="form-control" id="palabraClave" 
+				th:value="${palabraClave}" placeholder="buscar" required="required">
+			</div>
+			<input type="submit" class="btn btn-info mb-2" value="buscar">
+			<input type="button" class="btn btn-secondary mb-2" value="limpiar" onclick="limpiarCampos()">
+	</form>
+	<br>
+		<table class="table table-striped table-bordered text-start ms-0">
+			<thead class="table-success">
+				<tr>
+					<th>Id</th>
+					<th>nombres</th>
+					<th>apellidos</th>
+					<th>dni</th>
+					<th>F.nacimiento</th>
+					<th>distrito</th>
+					<th>telefono</th>
+					<th>correo</th>
+					<th>curso</th>
+					<th>aulas a cargo</th>
+					<th>operaciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="docente: ${listaDocentes}">
+					<td th:text="${docente.id}"></td>
+					<td th:text="${docente.nombres}"></td>
+					<td th:text="${docente.apellidos}"></td>
+					<td th:text="${docente.dni}"></td>
+					<td th:text="${docente.fechaNacimiento}"></td>
+					<td th:text="${docente.direccion}"></td>
+					<td th:text="${docente.telefono}"></td>
+					<td th:text="${docente.correo}"></td>
+					<td th:text="${docente.area}"></td>
+					<td th:text="${docente.aulas}"></td>
+					<td><a th:href="@{'/docentes/editar'+'/'+${docente.id}}"  class="btn btn-warning">editar</a>
+						<a th:href="@{'/docentes/eliminar'+'/'+${docente.id}}" class="btn btn-danger"
+                   onclick="return confirm('¿Estás seguro de eliminar esta alumno');">eliminar</a>
+                   </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+	function limpiarCampos(){
+		window.location='/docentes';
+	}
+	</script>
+</body>
+</html>

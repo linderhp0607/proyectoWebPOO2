@@ -1,5 +1,7 @@
 package com.app.proyecto.aula;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +23,8 @@ public class aula {
 	public aula() {
 		super();
 	}
+	
+	
 
 	public aula(Integer id, String nombre, String turno) {
 		super();
@@ -67,6 +71,35 @@ public class aula {
 
 	public void setTurno(String turno) {
 		this.turno = turno;
+	}
+
+	
+
+
+	@Override
+	public String toString() {
+		return "" + nombre + ", turno: " + turno + "";
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		aula other = (aula) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	
